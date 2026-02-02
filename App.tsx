@@ -8,7 +8,6 @@ import Skills from './components/Skills';
 import Education from './components/Education';
 import Contact from './components/Contact';
 import Preloader from './components/Preloader';
-import { ChevronUp } from 'lucide-react';
 import { Page, Theme, ExperienceItem } from './types/index';
 import { experiences as experiencesData } from './data/experiences';
 
@@ -16,7 +15,6 @@ const App: React.FC = () => {
   const [hasStarted, setHasStarted] = useState(false);
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedExp, setSelectedExp] = useState<ExperienceItem | null>(null);
-  const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light';
     const saved = localStorage.getItem('theme');
@@ -33,76 +31,57 @@ const App: React.FC = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolledPastHero(window.scrollY > 300);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
-  const goBackToStart = () => setHasStarted(false);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  const handleReplayIntro = () => {
+    setHasStarted(false);
+    setCurrentPage('home');
+    window.scrollTo(0, 0);
   };
 
   const handleSetPage = (page: Page) => {
     setCurrentPage(page);
-    if (page !== 'exp-detail') {
-      const element = document.getElementById(page);
-      if (element) {
-        const offset = 80;
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const renderContent = () => {
-    if (currentPage === 'exp-detail' && selectedExp) {
-      return (
-        <ExperienceDetail 
-          exp={selectedExp} 
-          onBack={() => {
-            setCurrentPage('home');
-            setTimeout(() => {
-              const el = document.getElementById('experience');
-              if (el) window.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' });
-            }, 100);
-          }}
-          onNext={() => {
-            const idx = experiencesData.findIndex(e => e.id === selectedExp.id);
-            setSelectedExp(experiencesData[(idx + 1) % experiencesData.length]);
-            window.scrollTo(0,0);
-          }}
-          onPrev={() => {
-            const idx = experiencesData.findIndex(e => e.id === selectedExp.id);
-            setSelectedExp(experiencesData[(idx - 1 + experiencesData.length) % experiencesData.length]);
-            window.scrollTo(0,0);
-          }}
-        />
-      );
+  const renderActivePage = () => {
+    // True multi-page switching logic
+    switch (currentPage) {
+      case 'home':
+        return <Home setPage={handleSetPage} onReplay={handleReplayIntro} />;
+      case 'experience':
+        return <Experience experiences={experiencesData} onSelect={(exp) => { setSelectedExp(exp); handleSetPage('exp-detail'); }} />;
+      case 'exp-detail':
+        return selectedExp ? (
+          <ExperienceDetail 
+            exp={selectedExp} 
+            onBack={() => handleSetPage('experience')}
+            onNext={() => {
+              const idx = experiencesData.findIndex(e => e.id === selectedExp.id);
+              setSelectedExp(experiencesData[(idx + 1) % experiencesData.length]);
+            }}
+            onPrev={() => {
+              const idx = experiencesData.findIndex(e => e.id === selectedExp.id);
+              setSelectedExp(experiencesData[(idx - 1 + experiencesData.length) % experiencesData.length]);
+            }}
+          />
+        ) : <Experience experiences={experiencesData} onSelect={(exp) => { setSelectedExp(exp); handleSetPage('exp-detail'); }} />;
+      case 'skills':
+        return <Skills />;
+      case 'about':
+        return (
+          <div className="flex flex-col">
+            <About />
+            <Education />
+          </div>
+        );
+      case 'education':
+        return <Education />;
+      case 'contact':
+        return <Contact />;
+      default:
+        return <Home setPage={handleSetPage} onReplay={handleReplayIntro} />;
     }
-
-    return (
-      <div className="flex flex-col">
-        <section id="home"><Home setPage={handleSetPage} /></section>
-        <section id="experience"><Experience experiences={experiencesData} onSelect={(exp: ExperienceItem) => { setSelectedExp(exp); setCurrentPage('exp-detail'); window.scrollTo(0,0); }} /></section>
-        <section id="skills" className="scroll-mt-24"><Skills /></section>
-        <section id="about" className="scroll-mt-24"><About /></section>
-        <section id="education" className="scroll-mt-24"><Education /></section>
-        <section id="contact" className="scroll-mt-24"><Contact /></section>
-      </div>
-    );
   };
 
   if (!hasStarted) {
@@ -110,32 +89,24 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 animate-reveal">
+    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-x-hidden">
       <Navbar 
         currentPage={currentPage} 
         setPage={handleSetPage} 
         theme={theme} 
         toggleTheme={toggleTheme} 
-        goBackToStart={goBackToStart}
+        onReplay={handleReplayIntro}
       />
       
-      <main className="flex-grow">
-        {renderContent()}
+      <main className="flex-grow pt-20 md:pt-24 animate-fade-in">
+        {renderActivePage()}
       </main>
 
-      {currentPage !== 'exp-detail' && (
-        <div className={`fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[60] flex flex-col gap-3 transition-all duration-700 ${
-          scrolledPastHero ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'
-        }`}>
-          <button 
-            onClick={scrollToTop}
-            className="w-12 h-12 md:w-14 md:h-14 rounded-full glass border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white shadow-2xl flex items-center justify-center hover:scale-110 hover:bg-white dark:hover:bg-slate-800 transition-all active:scale-95"
-            aria-label="Go Up"
-          >
-            <ChevronUp size={24} strokeWidth={2.5} />
-          </button>
-        </div>
-      )}
+      <footer className="py-10 border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-slate-950 flex justify-center items-center">
+        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">
+          © 2025 MUHAMMAD QASIM ALI TAREEN
+        </span>
+      </footer>
     </div>
   );
 };
