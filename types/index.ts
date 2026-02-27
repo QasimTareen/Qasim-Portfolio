@@ -13,4 +13,5 @@ export interface ExperienceItem {
   tech: string[];
   color: 'blue' | 'purple' | 'red' | 'google';
   link: string;
+  website?: string;
 }

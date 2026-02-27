@@ -12,7 +12,7 @@ export const experiences: ExperienceItem[] = [
     items: ["Chapter Leadership & Strategy", "Global Community Management", "Azure Workshop Lead"],
     tech: ["Azure", "GitHub", "Cloud", "Community Ops"],
     color: "blue",
-    link: "https://www.instagram.com/mlsa.cui.lahore/"
+    link: "https://mlsa-website-cuilahore.vercel.app/"
   },
   { 
     id: 'looplab',
