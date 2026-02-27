@@ -103,7 +103,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="py-10 border-t border-slate-100 dark:border-slate-900 bg-white dark:bg-slate-950 flex justify-center items-center">
-        <span className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400">
+        <span className="text-xs font-normal uppercase tracking-[0.4em] text-slate-400">
           © 2025 MUHAMMAD QASIM ALI TAREEN
         </span>
       </footer>

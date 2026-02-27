@@ -39,7 +39,7 @@ const Experience: React.FC<ExperienceProps> = ({ experiences, onSelect }) => {
     <div className="min-h-screen py-20 md:py-32 px-4 sm:px-6 bg-white dark:bg-slate-950 transition-colors duration-500">
       <div className="max-w-5xl mx-auto">
         <div className="mb-12 md:mb-24 text-left">
-          <span className="text-[10px] font-normal uppercase tracking-[0.4em] text-blue-600 dark:text-blue-400 mb-2 block">
+          <span className="text-sm font-normal uppercase tracking-[0.4em] text-blue-600 dark:text-blue-400 mb-2 block">
             Strategic Path
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal uppercase tracking-tight text-slate-900 dark:text-white">
@@ -67,11 +67,11 @@ const Experience: React.FC<ExperienceProps> = ({ experiences, onSelect }) => {
                     {exp.company}
                   </h3>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-                    <span className="text-[8px] sm:text-[10px] md:text-xs font-normal uppercase tracking-widest text-slate-400">
+                    <span className="text-sm font-normal uppercase tracking-widest text-slate-400">
                       {exp.title}
                     </span>
                     <span className="hidden sm:block text-slate-200">•</span>
-                    <span className="text-[8px] sm:text-[10px] md:text-xs font-normal uppercase tracking-widest text-slate-400">
+                    <span className="text-sm font-normal uppercase tracking-widest text-slate-400">
                       {exp.period}
                     </span>
                   </div>

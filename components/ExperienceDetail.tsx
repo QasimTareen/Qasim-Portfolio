@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Instagram, ExternalLink, ChevronRight, ChevronLeft, LayoutGrid } from 'lucide-react';
+import { ArrowLeft, ExternalLink, ChevronRight, ChevronLeft, LayoutGrid } from 'lucide-react';
 import { ExperienceItem } from '../types';
 
 interface ExperienceDetailProps {
@@ -51,9 +51,9 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
         <div className="max-w-5xl mx-auto relative z-10">
           <button 
             onClick={onBack} 
-            className="flex items-center gap-2 text-[10px] md:text-xs font-normal uppercase tracking-widest text-white mb-10 transition-all hover:gap-4 group bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 w-fit"
+            className="flex items-center gap-2 text-sm font-normal uppercase tracking-widest text-white mb-10 transition-all hover:gap-4 group bg-white/10 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 w-fit"
           >
-            <ArrowLeft size={14} strokeWidth={3} /> 
+            <ArrowLeft size={14} /> 
             Back to Milestones
           </button>
 
@@ -62,7 +62,7 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
                <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
             </div>
             <div className="text-center md:text-left">
-               <span className="text-white/70 text-[10px] md:text-xs font-normal uppercase tracking-[0.3em] mb-3 block">
+               <span className="text-white/70 text-sm font-normal uppercase tracking-[0.3em] mb-3 block">
                  {exp.period}
                </span>
                <h2 className="text-2xl md:text-3xl font-normal text-white tracking-tight uppercase leading-tight mb-2">
@@ -84,7 +84,7 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
              <section className="animate-reveal">
                 <div className="flex items-center gap-4 mb-6">
                   <div className={`w-8 h-[2px] ${colors.bg}`}></div>
-                  <h3 className={`text-[10px] md:text-xs font-normal uppercase tracking-[0.4em] ${colors.text}`}>Mission Overview</h3>
+                  <h3 className={`text-sm font-normal uppercase tracking-[0.4em] ${colors.text}`}>Mission Overview</h3>
                 </div>
                 <p className="text-base md:text-lg font-normal text-slate-700 dark:text-slate-300 leading-relaxed">
                   {exp.longDesc}
@@ -94,13 +94,13 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
              <section className="animate-reveal [animation-delay:200ms]">
                 <div className="flex items-center gap-4 mb-8">
                   <div className={`w-8 h-[2px] ${colors.bg}`}></div>
-                  <h3 className={`text-[10px] md:text-xs font-normal uppercase tracking-[0.4em] ${colors.text}`}>Core Contributions</h3>
+                  <h3 className={`text-sm font-normal uppercase tracking-[0.4em] ${colors.text}`}>Core Contributions</h3>
                 </div>
                 <div className="grid gap-4">
                    {exp.items.map((item, i) => (
                      <div key={i} className="flex gap-5 items-start p-6 rounded-[1.5rem] md:rounded-[2rem] bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 transition-all hover:translate-x-2 group">
                         <div className={`mt-1 w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center text-white ${colors.bg} shadow-lg transition-transform group-hover:scale-110`}>
-                           <ChevronRight size={14} strokeWidth={3} />
+                           <ChevronRight size={14} />
                         </div>
                         <span className="text-sm md:text-base font-normal text-slate-700 dark:text-slate-300 uppercase leading-snug tracking-tight">{item}</span>
                      </div>
@@ -112,10 +112,10 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
           <div className="lg:col-span-5 space-y-8 animate-reveal [animation-delay:400ms]">
              <div className="p-10 rounded-[2.5rem] bg-slate-950 text-white shadow-2xl relative overflow-hidden group">
                 <div className={`absolute -top-10 -right-10 w-40 h-40 ${colors.bg} blur-[80px] opacity-20 transition-opacity group-hover:opacity-40`}></div>
-                <h3 className="text-[10px] font-normal text-slate-500 mb-8 uppercase tracking-[0.4em]">Technology Stack</h3>
+                <h3 className="text-sm font-normal text-slate-500 mb-8 uppercase tracking-[0.4em]">Technology Stack</h3>
                 <div className="flex flex-wrap gap-2.5">
                    {exp.tech.map(t => (
-                     <span key={t} className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-normal uppercase tracking-widest text-white/90 hover:bg-white/10 transition-colors">
+                     <span key={t} className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm font-normal uppercase tracking-widest text-white/90 hover:bg-white/10 transition-colors">
                        {t}
                      </span>
                    ))}
@@ -128,7 +128,7 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
                     href={exp.website} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className={`w-full py-6 rounded-[1.5rem] md:rounded-[2rem] font-normal text-[12px] uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all shadow-xl hover:scale-[1.02] active:scale-95 text-white ${colors.button}`}
+                    className={`w-full py-6 rounded-[1.5rem] md:rounded-[2rem] font-normal text-sm uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all shadow-xl hover:scale-[1.02] active:scale-95 text-white ${colors.button}`}
                   >
                     <ExternalLink size={20} />
                     Official Website
@@ -138,15 +138,15 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
                  href={exp.link} 
                  target="_blank" 
                  rel="noopener noreferrer"
-                 className={`w-full py-6 rounded-[1.5rem] md:rounded-[2rem] font-normal text-[12px] uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all shadow-xl hover:scale-[1.02] active:scale-95 text-white ${colors.button}`}
+                 className={`w-full py-6 rounded-[1.5rem] md:rounded-[2rem] font-normal text-sm uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all shadow-xl hover:scale-[1.02] active:scale-95 text-white ${colors.button}`}
                 >
-                  {exp.id === 'mlsa' ? <Instagram size={20} /> : <ExternalLink size={20} />}
-                  {exp.id === 'mlsa' ? 'Instagram' : 'Official Page'}
+                  {exp.id === 'mlsa' ? <ExternalLink size={20} /> : <ExternalLink size={20} />}
+                  {exp.id === 'mlsa' ? 'Website' : 'Official Page'}
                 </a>
 
                 <button 
                  onClick={onBack}
-                 className="w-full py-6 rounded-[1.5rem] md:rounded-[2rem] font-normal text-[12px] uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all border-2 border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white"
+                 className="w-full py-6 rounded-[1.5rem] md:rounded-[2rem] font-normal text-sm uppercase tracking-[0.3em] flex items-center justify-center gap-3 transition-all border-2 border-slate-100 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white"
                 >
                   <LayoutGrid size={20} />
                   Back to Milestones
@@ -163,7 +163,7 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
               onClick={onPrev}
               className="group flex flex-col items-center md:items-start gap-2 text-left"
             >
-              <span className="text-[10px] font-normal uppercase tracking-[0.4em] text-slate-400 group-hover:text-blue-600 transition-colors">Previous Milestone</span>
+              <span className="text-sm font-normal uppercase tracking-[0.4em] text-slate-400 group-hover:text-blue-600 transition-colors">Previous Milestone</span>
               <div className="flex items-center gap-4 text-lg md:text-xl font-normal uppercase tracking-tight text-slate-900 dark:text-white">
                 <ChevronLeft className="group-hover:-translate-x-2 transition-transform" />
                 Navigate Back
@@ -176,7 +176,7 @@ const ExperienceDetail: React.FC<ExperienceDetailProps> = ({ exp, onBack, onNext
               onClick={onNext}
               className="group flex flex-col items-center md:items-end gap-2 text-right"
             >
-              <span className="text-[10px] font-normal uppercase tracking-[0.4em] text-slate-400 group-hover:text-blue-600 transition-colors">Next Milestone</span>
+              <span className="text-sm font-normal uppercase tracking-[0.4em] text-slate-400 group-hover:text-blue-600 transition-colors">Next Milestone</span>
               <div className="flex items-center gap-4 text-lg md:text-xl font-normal uppercase tracking-tight text-slate-900 dark:text-white">
                 Progress Forward
                 <ChevronRight className="group-hover:translate-x-2 transition-transform" />

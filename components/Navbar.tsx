@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setPage, theme, toggleThem
         <div className="max-w-7xl mx-auto flex justify-between items-center glass rounded-full py-2 px-6 shadow-2xl border-white/5 transition-all duration-500">
           <button 
             onClick={() => handleNavigate('home')} 
-            className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 group pointer-events-auto"
+            className="text-sm font-normal uppercase tracking-[0.2em] flex items-center gap-2 group pointer-events-auto"
           >
             Qasim <span className="w-1.5 h-1.5 rounded-full bg-blue-600 group-hover:scale-[2] transition-transform"></span> Tareen
           </button>
@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setPage, theme, toggleThem
               <button 
                 key={item.id}
                 onClick={() => handleNavigate(item.id)}
-                className={`text-[9px] font-black uppercase tracking-widest transition-all hover:text-blue-600 relative py-1 ${
+                className={`text-xs font-normal uppercase tracking-widest transition-all hover:text-blue-600 relative py-1 ${
                   isItemActive(item.id) ? 'text-blue-600' : 'text-slate-400'
                 }`}
               >
@@ -103,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setPage, theme, toggleThem
               <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
                 <Sparkles size={16} />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-900 dark:text-white">Arsenal Menu</span>
+              <span className="text-sm font-normal uppercase tracking-widest text-slate-900 dark:text-white">Arsenal Menu</span>
             </div>
             <button onClick={() => setIsSidebarOpen(false)} className="p-2 text-slate-400">
               <X size={24} />
@@ -125,7 +125,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setPage, theme, toggleThem
                   <span className={`p-2 rounded-xl ${isItemActive(item.id) ? 'bg-blue-600 text-white' : 'bg-white dark:bg-slate-800 shadow-sm'}`}>
                     {item.icon}
                   </span>
-                  <span className="text-lg font-black uppercase tracking-tighter">{item.label}</span>
+                  <span className="text-lg font-normal uppercase tracking-tighter">{item.label}</span>
                 </div>
                 {isItemActive(item.id) && <ChevronRight size={18} />}
               </button>
@@ -135,12 +135,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, setPage, theme, toggleThem
           <div className="mt-auto space-y-4">
             <button 
               onClick={() => { setIsSidebarOpen(false); onReplay(); }}
-              className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-900 dark:bg-white text-[10px] font-black uppercase tracking-widest text-white dark:text-black shadow-xl"
+              className="w-full flex items-center justify-center gap-3 p-4 rounded-2xl bg-slate-900 dark:bg-white text-sm font-normal uppercase tracking-widest text-white dark:text-black shadow-xl"
             >
               <RefreshCcw size={16} /> Replay Intro
             </button>
             <div className="text-center py-4">
-              <span className="text-[7px] font-black uppercase tracking-[0.4em] text-slate-400">
+              <span className="text-xs font-normal uppercase tracking-[0.4em] text-slate-400">
                 MUHAMMAD QASIM ALI TAREEN
               </span>
             </div>
